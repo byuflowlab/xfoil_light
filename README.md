@@ -27,6 +27,6 @@ make
 make install
 ```
 
-By default these commands will build and install the libraries `libxfoil` and `libxfoil_cs` to `/usr/local/lib`  Note that root privileges may be necessary for the installation command.
+By default these commands will build and install the libraries `libxfoil` and `libxfoil_cs` to `/usr/local/lib`  Note that root privileges (`sudo`) may be necessary for the installation command.
 
 For examples of how to access these shared libraries see the [Xfoil.jl](https://github.com/byuflowlab/Xfoil.jl) and [pyXLIGHT](https://github.com/mdolab/pyXLIGHT) packages.
