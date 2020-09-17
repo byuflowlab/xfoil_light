@@ -1,4 +1,4 @@
-# xfoil-light
+# xfoil_light
 
 This package provides the shared libraries `xfoil_light` and `xfoil_light_cs`, which are both versions of Mark Drela's [XFOIL](https://web.mit.edu/drela/Public/web/xfoil/) code, with the GUI features removed.  These shared libraries may be used to directly access the functions and variables in [XFOIL](https://web.mit.edu/drela/Public/web/xfoil/) from various programming languages.  The functions and variables found in the shared libraries `xfoil_light` and `xfoil_light_cs` are identical, except `xfoil_light_cs` provides a complex implementation of [XFOIL](https://web.mit.edu/drela/Public/web/xfoil/) which may be used to determine gradients of [XFOIL](https://web.mit.edu/drela/Public/web/xfoil/) functions via the complex step method.
 
@@ -20,7 +20,7 @@ The functions and variables in the shared libraries provided by this package may
 
 Assuming that no special boilerplate code is needed, the shared libraries in this package can be built using CMake. For a Unix-like system the following commands may be used:
 ```
-cd [xfoil-light directory]
+cd [xfoil_light directory]
 mkdir build && cd build
 cmake ..
 make
