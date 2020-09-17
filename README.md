@@ -8,7 +8,7 @@ The code in this package was originally forked from the [pyXLIGHT](https://githu
 
 ### Julia
 
-We recommend using the [Xfoil.jl](https://github.com/byuflowlab/Xfoil.jl) Julia package
+We recommend using the [Xfoil.jl](https://github.com/byuflowlab/Xfoil.jl) Julia package, which provides a wrapper for the shared libraries provided by this package.  See the installation and usage instructions [there](https://github.com/byuflowlab/Xfoil.jl).
 
 ### Python
 
