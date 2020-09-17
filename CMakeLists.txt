@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(libxfoil)
+project(xfoil_light)
 enable_language(Fortran)
 
 if(CMAKE_Fortran_COMPILER_ID MATCHES "GNU")
@@ -12,6 +12,6 @@ endif()
 
 file(GLOB_RECURSE sources src/*.f src/*.INC)
 file(GLOB_RECURSE sources_cs src_cs/*.f src_cs/*.f90 src_cs/*.INC)
-add_library(xfoil SHARED ${sources})
-add_library(xfoil_cs SHARED ${sources_cs})
-install(TARGETS xfoil xfoil_cs DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
+add_library(xfoil_light SHARED ${sources})
+add_library(xfoil_light_cs SHARED ${sources_cs})
+install(TARGETS xfoil_light xfoil_light_cs DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
