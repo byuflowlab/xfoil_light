@@ -136,76 +136,6 @@ C
       END ! GAUSS
 
 
-c$$$      SUBROUTINE CGAUSS(NSIZ,NN,Z,R,NRHS)
-c$$$C********************************************
-c$$$C     Solves general complex linear systems.
-c$$$C********************************************
-c$$$      COMPLEX Z(NSIZ,NSIZ), R(NSIZ,NRHS)
-c$$$      COMPLEX PIVOT, TEMP, ZTMP
-c$$$C
-c$$$      DO 1 NP=1, NN-1
-c$$$        NP1 = NP+1
-c$$$C
-c$$$C------ find max pivot index NX
-c$$$        NX = NP
-c$$$        DO 11 N=NP1, NN
-c$$$          IF(ABS(Z(N,NP))-ABS(Z(NX,NP))) 11,11,111
-c$$$  111      NX = N
-c$$$   11   CONTINUE
-c$$$C
-c$$$        PIVOT = (1.0,0.0)/Z(NX,NP)
-c$$$C
-c$$$C------ switch pivots
-c$$$        Z(NX,NP) = Z(NP,NP)
-c$$$C
-c$$$C------ switch rows & normalize pivot row
-c$$$        DO 12 L=NP1, NN
-c$$$          TEMP = Z(NX,L)*PIVOT
-c$$$          Z(NX,L) = Z(NP,L)
-c$$$          Z(NP,L) = TEMP
-c$$$   12   CONTINUE
-c$$$C
-c$$$        DO 13 L=1, NRHS
-c$$$          TEMP = R(NX,L)*PIVOT
-c$$$          R(NX,L) = R(NP,L)
-c$$$          R(NP,L) = TEMP
-c$$$   13   CONTINUE
-c$$$C
-c$$$C------ forward eliminate everything
-c$$$        DO 15 K=NP1, NN
-c$$$          ZTMP = Z(K,NP)
-c$$$C
-c$$$C          IF(ZTMP.EQ.0.0) GO TO 15
-c$$$C
-c$$$          DO 151 L=NP1, NN
-c$$$            Z(K,L) = Z(K,L) - ZTMP*Z(NP,L)
-c$$$  151     CONTINUE
-c$$$          DO 152 L=1, NRHS
-c$$$            R(K,L) = R(K,L) - ZTMP*R(NP,L)
-c$$$  152     CONTINUE
-c$$$   15   CONTINUE
-c$$$C
-c$$$    1 CONTINUE
-c$$$C
-c$$$C---- solve for last row
-c$$$      DO 2 L=1, NRHS
-c$$$        R(NN,L) = R(NN,L)/Z(NN,NN)
-c$$$    2 CONTINUE
-c$$$C
-c$$$C---- back substitute everything
-c$$$      DO 3 NP=NN-1, 1, -1
-c$$$        NP1 = NP+1
-c$$$        DO 31 L=1, NRHS
-c$$$          DO 310 K=NP1, NN
-c$$$            R(NP,L) = R(NP,L) - Z(NP,K)*R(K,L)
-c$$$  310     CONTINUE
-c$$$   31   CONTINUE
-c$$$    3 CONTINUE
-c$$$C
-c$$$      RETURN
-c$$$      END ! CGAUSS
-
-
 
       SUBROUTINE LUDCMP(NSIZ,N,A,INDX)
 C     *******************************************************
@@ -225,7 +155,7 @@ C
 	implicit complex(a-h, o-z) 
       DIMENSION A(NSIZ,NSIZ), INDX(NSIZ)
 C
-      PARAMETER (NVX=300)
+      PARAMETER (NVX=500)
       DIMENSION VV(NVX)
 C
       IF(N.GT.NVX) STOP 'LUDCMP: Array overflow. Increase NVX.'

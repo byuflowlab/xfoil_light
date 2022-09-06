@@ -84,44 +84,7 @@ C
       LIPAN = .FALSE.
       LVCONV = .FALSE.
       LSCINI = .FALSE.
-CCC      LBLINI = .FALSE.
-C
-C      IF(LCONF) WRITE(*,1200) N
-C 1200 FORMAT(/' Current airfoil nodes set from buffer airfoil nodes (',
-C     &        I4,' )')
-C
+
       RETURN
       END ! ABCOPY
 
-
-      SUBROUTINE GETXYF(X,XP,Y,YP,S,N, TOPS,BOTS,XF,YF)
-	use complexify 
-	implicit complex(a-h, o-z) 
-      DIMENSION X(N),XP(N),Y(N),YP(N),S(N)
-C
-      IF(XF .ceq. -999.0)
-     &  CALL ASKR('Enter flap hinge x location^',XF)
-C
-C---- find top and bottom y at hinge x location
-      TOPS = S(1) + (X(1) - XF)
-      BOTS = S(N) - (X(N) - XF)
-      CALL SINVRT(TOPS,XF,X,XP,S,N)
-      CALL SINVRT(BOTS,XF,X,XP,S,N)
-      TOPY = SEVAL(TOPS,Y,YP,S,N)
-      BOTY = SEVAL(BOTS,Y,YP,S,N)
-C
-      WRITE(*,1000) TOPY, BOTY
- 1000 FORMAT(/'  Top    surface:  y =', F8.4,'     y/t = 1.0'
-     &       /'  Bottom surface:  y =', F8.4,'     y/t = 0.0')
-C
-      IF(YF .ceq. -999.0)
-     & CALL ASKR(
-     &  'Enter flap hinge y location (or 999 to specify y/t)^',YF)
-C
-      IF(YF .ceq. 999.0) THEN
-        CALL ASKR('Enter flap hinge relative y/t location^',YREL)
-	YF = TOPY*YREL + BOTY*(1.0-YREL)
-      ENDIF
-C
-      RETURN
-      END ! GETXYF
