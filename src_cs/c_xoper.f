@@ -120,6 +120,7 @@ C
 	use complexify
 	implicit complex(a-h, o-z)
       include 'c_XFOIL.INC'
+      INTEGER, INTENT(OUT) :: DIMOUT
       complex, DIMENSION(IZX), INTENT(OUT) :: XOUT
       complex, DIMENSION(IZX), INTENT(OUT) :: CPOUT
 C
