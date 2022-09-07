@@ -264,8 +264,7 @@ C----------------------------------------------------------------
 	implicit complex(a-h, o-z)
       include 'c_XFOIL.INC'
       include 'c_XBL.INC'
-      DATA DAEPS / 5.0E-5 /
-CCC   DATA DAEPS / 1.0D-12 /
+      DATA DAEPS / 1.0E-12 /
 C
 C---- save variables and sensitivities at IBL ("2") for future restoration
       DO 5 ICOM=1, NCOM
