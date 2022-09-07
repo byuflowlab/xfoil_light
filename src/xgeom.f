@@ -32,7 +32,7 @@ C     line connecting X(SLE),Y(SLE) and the TE point.
 C------------------------------------------------------
 C
 C---- convergence tolerance
-      DSEPS = (S(N)-S(1)) * 1.0E-9
+      DSEPS = (S(N)-S(1)) * 1.0E-10
 C
 C---- set trailing edge point coordinates
       XTE = 0.5*(X(1) + X(N))

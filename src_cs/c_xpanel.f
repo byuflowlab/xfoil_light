@@ -112,7 +112,7 @@ C-----------------------------------------------------------------------
       LOGICAL GEOLIN,SIGLIN
 C
 C---- distance tolerance for determining if two points are the same
-      SEPS = (S(N)-S(1)) * 1.0E-9
+      SEPS = (S(N)-S(1)) * 1.0E-10
 
       IO = I
 C

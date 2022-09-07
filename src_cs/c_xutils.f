@@ -49,7 +49,7 @@ C
         DRATIO = -RES/DRESDR
         RATIO = RATIO + DRATIO
 C
-        IF(ABS(DRATIO) .LT. 1.0E-9) GO TO 11
+        IF(ABS(DRATIO) .LT. 1.0E-10) GO TO 11
 C
     1 CONTINUE
 c      WRITE(*,*) 'SETEXP: Convergence failed.  Continuing anyway ...'
