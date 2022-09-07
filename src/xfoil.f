@@ -993,7 +993,7 @@ C------ update node position
 C
 CCC        IF(RLX.EQ.1.0) WRITE(*,*) DMAX
 CCC        IF(RLX.NE.1.0) WRITE(*,*) DMAX,'    RLX =',RLX
-        IF(ABS(DMAX).LT.1.E-3) GO TO 11
+        IF(ABS(DMAX).LT.1.E-10) GO TO 11
    10 CONTINUE
       WRITE(*,*) 'Paneling convergence failed.  Continuing anyway...'
 C

@@ -424,7 +424,7 @@ C
         RESP = DEVAL(SI,X,XS,S,N)
         DS = -RES/RESP
         SI = SI + DS
-        IF(ABS(DS/(S(N)-S(1))) .LT. 1.0E-5) RETURN
+        IF(ABS(DS/(S(N)-S(1))) .LT. 1.0E-10) RETURN
    10 CONTINUE
       WRITE(*,*)
      &  'SINVRT: spline inversion failed. Input value returned.'
@@ -525,7 +525,7 @@ C------ re-spline X(S) and Y(S)
         CALL SEGSPL(X,XS,S,N)
         CALL SEGSPL(Y,YS,S,N)
 C
-        IF(ABS(SERR) .LT. 1.0E-7) RETURN
+        IF(ABS(SERR) .LT. 1.0E-10) RETURN
 C
  100  CONTINUE
 C

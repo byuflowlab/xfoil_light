@@ -354,7 +354,7 @@ C------ set new CL(M)
         CALL CLCALC(N,X,Y,GAM,GAM_A,ALFA,MINF,QINF, XCMREF,YCMREF,
      &              CL,CM,CDP,CL_ALF,CL_MSQ)
 C
-        IF(ABS(DCLM).LE.1.0E-10) GO TO 110
+        IF(ABS(DCLM).LE.1.0E-9) GO TO 110
 C
   100 CONTINUE
       WRITE(*,*) 'SPECAL:  Minf convergence failed'
@@ -427,7 +427,7 @@ C------ set new CL(alpha)
         CALL CLCALC(N,X,Y,GAM,GAM_A,ALFA,MINF,QINF, XCMREF,YCMREF,
      &              CL,CM,CDP,CL_ALF,CL_MSQ)
 C
-        IF(ABS(DALFA).LE.1.0E-6) GO TO 110
+        IF(ABS(DALFA).LE.1.0E-9) GO TO 110
   100 CONTINUE
       WRITE(*,*) 'SPECCL:  CL convergence failed'
   110 CONTINUE
@@ -456,7 +456,7 @@ C----------------------------------------
       include 'c_XFOIL.INC'
 C
 C---- convergence tolerance
-      DATA EPS1 / 1.0E-10 /
+      DATA EPS1 / 1.0E-9 /
 C
       NITER = NITER1
 C
