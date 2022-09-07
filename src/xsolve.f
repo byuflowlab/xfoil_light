@@ -46,7 +46,7 @@ C------ find max pivot index NX
           ARG = ABS(Z(N,NP))-ABS(Z(NX,NP))
           IF (ARG.LT.0) then
             GOTO 11
-          ELSE IF (ARG.CEQ.0) THEN
+          ELSE IF (ARG.EQ.0) THEN
             GOTO 11
           ELSE
             GOTO 111
