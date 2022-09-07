@@ -1434,8 +1434,8 @@ C---- evaluate so as to minimize roundoff for very small GAM(I) or GAM(I+1)
       ENDIF
 C
 C---- tweak stagnation point if it falls right on a node (very unlikely)
-      IF(SST .LE. S(I)  ) SST = S(I)   + 1.0E-10
-      IF(SST .GE. S(I+1)) SST = S(I+1) - 1.0E-10
+      IF(SST .LE. S(I)  ) SST = S(I)   + 1.0E-12
+      IF(SST .GE. S(I+1)) SST = S(I+1) - 1.0E-12
 C
       SST_GO = (SST  - S(I+1))/DGAM
       SST_GP = (S(I) - SST   )/DGAM

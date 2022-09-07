@@ -1632,27 +1632,9 @@ C----- similarity logarithmic differences  (prescribed)
       ELSE
 C----- usual logarithmic differences
        XLOG = LOG(X2/X1)
-
        ULOG = LOG(U2/U1)
        TLOG = LOG(T2/T1)
        HLOG = LOG(HS2/HS1)
-
-c       write(*,*) 'X2',X2
-c       write(*,*) 'X1',X1
-c       write(*,*) 'logx2/x1',XLOG
-c       write(*,*) 'U1',U1
-c       write(*,*) 'U2',U2
-c       write(*,*) 'T1',T1
-c       write(*,*) 'T2',T2
-c       write(*,*) 'HS1',HS1
-c       write(*,*) 'HS2',HS2
-
-c       XLOG = 2.0*(X2-X1)/(X2+X1)
-
-c       ULOG = 2.0*(U2-U1)/(U2+U1)
-c       TLOG = 2.0*(T2-T1)/(T2+T1)
-c       HLOG = 2.0*(HS2-HS1)/(HS2+HS1)
-c       write(*,*) 'stuff',XLOG,ULOG,TLOG,HLOG
        DDLOG = 1.0
       ENDIF
 C
