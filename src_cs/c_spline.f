@@ -544,7 +544,7 @@ C------ re-spline X(S) and Y(S)
         CALL SEGSPL(X,XS,S,N)
         CALL SEGSPL(Y,YS,S,N)
 C
-        IF(ABS(SERR) .LT. 1.0E-10) RETURN
+        IF(ABS(SERR) .LT. 1.0E-14) RETURN
 C
  100  CONTINUE
 C

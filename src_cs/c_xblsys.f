@@ -264,7 +264,7 @@ C----------------------------------------------------------------
 	implicit complex(a-h, o-z)
       include 'c_XFOIL.INC'
       include 'c_XBL.INC'
-      DATA DAEPS / 1.0E-12 /
+      DATA DAEPS / 5.0E-10 /
 C
 C---- save variables and sensitivities at IBL ("2") for future restoration
       DO 5 ICOM=1, NCOM
@@ -435,7 +435,6 @@ c       WRITE(*,*) "CONVERGENCE PROBLEMS IN BL ANALYSIS, XBLSYS.F"
        cl = -10
        cd = -10
        cm = -10
-c	write(*,*) cl
        LVCONV = .FALSE.
 c      GOTO 123
 c      STOP
@@ -622,12 +621,8 @@ c      IMPLICIT complex(M)
       implicit complex(a-h,m, o-z)
       include 'c_XBL.INC'
 
-c      write(*,*) 'VS1 before first part',VS1
-c      write(*,*) 'VS2 before first part',VS2
-
 C
 C---- calculate secondary BL variables and their sensitivities
-c      write(*,*) 'X2 before the first part',X2
       IF(WAKE) THEN
        CALL BLVAR(3)
        CALL BLMID(3)
@@ -639,9 +634,6 @@ c      write(*,*) 'X2 before the first part',X2
        CALL BLMID(1)
       ENDIF
 C
-c      write(*,*) 'VS1 after first part',VS1
-c      write(*,*) 'VS2 after first part',VS2
-c      write(*,*) 'X2 after the first part',X2
 C---- for the similarity station, "1" and "2" variables are the same
       IF(SIMI) THEN
        DO 3 ICOM=1, NCOM
@@ -650,31 +642,19 @@ C---- for the similarity station, "1" and "2" variables are the same
       ENDIF
 C
 C---- set up appropriate finite difference system for current interval
-c     complex ERROR IS HERE______________________--
-c      write(*,*) 'TRAN',TRAN
       IF(TRAN) THEN
-c       write(*,*) 'call trdif'
        CALL TRDIF
       ELSE IF(SIMI) THEN
-c       write(*,*) 'call bldif(0)'
        CALL BLDIF(0)
       ELSE IF(.NOT.TURB) THEN
-c       write(*,*) 'call bldif(1)'
 c
        CALL BLDIF(1)
-c                                 <-----error here
+
       ELSE IF(WAKE) THEN
-c       write(*,*) 'call bldif(3)'
        CALL BLDIF(3)
       ELSE IF(TURB) THEN
-c       write(*,*) 'call bldif(2)'
        CALL BLDIF(2)
       ENDIF
-c      write(*,*) 'X2 after the second part',X2
-c_______________________________________-
-cc      write(*,*) 'VS1 after second part',VS1
-c      write(*,*) 'VS2 after second part',VS2
-c      stop
 
       IF(SIMI) THEN
 C----- at similarity station, "1" variables are really "2" variables
@@ -700,7 +680,6 @@ C------ combine with derivatives of compressible  U1,U2 = Uec(Uei M)
         VSM(K)   = RES_U1*U1_MS + RES_U2*U2_MS  + RES_MS
    20 CONTINUE
 C
-c      write(*,*) 'X2 at end',X2
       RETURN
       END
 
@@ -964,7 +943,6 @@ C----- turbulent
        IF(CF2L.GT.CF2) THEN
 C------- laminar Cf is greater than turbulent Cf -- use laminar
 C-       (this will only occur for unreasonably small Rtheta)
-ccc      write(*,*) 'Cft Cfl Rt Hk:', CF2, CF2L, RT2, HK2, X2
          CF2     = CF2L
          CF2_HK2 = CF2L_HK2
          CF2_RT2 = CF2L_RT2
@@ -1095,7 +1073,6 @@ C
         IF(DI2L.GT.DI2) THEN
 C------- laminar CD is greater than turbulent CD -- use laminar
 C-       (this will only occur for unreasonably small Rtheta)
-ccc       write(*,*) 'CDt CDl Rt Hk:', DI2, DI2L, RT2, HK2
           DI2    = DI2L
           DI2_S2 = 0.
           DI2_U2 = DI2L_HK2*HK2_U2 + DI2L_RT2*RT2_U2
@@ -1125,7 +1102,6 @@ C------ laminar wake CD
         IF(DI2L .GT. DI2) THEN
 C------- laminar wake CD is greater than turbulent CD -- use laminar
 C-       (this will only occur for unreasonably small Rtheta)
-ccc         write(*,*) 'CDt CDl Rt Hk:', DI2, DI2L, RT2, HK2
          DI2    = DI2L
          DI2_S2 = 0.
          DI2_U2 = DI2L_HK2*HK2_U2 + DI2L_RT2*RT2_U2
@@ -1220,7 +1196,6 @@ C---- midpoint skin friction coefficient  (zero in wake)
        CALL CFT( HKA, RTA, MA, CFM, CFM_HKA, CFM_RTA, CFM_MA )
        CALL CFL( HKA, RTA, MA, CFML,CFML_HKA,CFML_RTA,CFML_MA)
        IF(CFML.GT.CFM) THEN
-ccc      write(*,*) 'Cft Cfl Rt Hk:', CFM, CFML, RTA, HKA, 0.5*(X1+X2)
          CFM     = CFML
          CFM_HKA = CFML_HKA
          CFM_RTA = CFML_RTA
@@ -1669,9 +1644,7 @@ C
 C---- local upwinding is based on local change in  log(Hk-1)
 C-    (mainly kicks in at transition)
       ARG = ABS((HK2-1.0)/(HK1-1.0))
-c      write(*,*) 'ARG:',ARG
       HL = LOG(ARG)
-c      write(*,*) 'log arg:',HL
       HL_HK1 = -1.0/(HK1-1.0)
       HL_HK2 =  1.0/(HK2-1.0)
 C

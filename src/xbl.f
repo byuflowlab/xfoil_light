@@ -896,7 +896,7 @@ C----------------------------------------------------
       REAL SENNEW
 ccc   REAL MDI
 C
-      DATA DEPS / 1.0E-10 /
+      DATA DEPS / 5.0E-12 /
 C
 C---- constant controlling how far Hk is allowed to deviate
 C-    from the specified value.

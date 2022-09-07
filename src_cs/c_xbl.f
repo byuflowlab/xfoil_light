@@ -41,8 +41,6 @@ C-------------------------------------------------
       complex MA_CLMR, MSQ_CLMR, MDI
 C
 C
-c      write(*,*) 'Inside Setbl'
-c      write(*,*) 'Xsi at start of setbl',XSI
 C---- set the CL used to define Mach, Reynolds numbers
       IF(LALFA) THEN
        CLMR = CL
@@ -94,12 +92,9 @@ C
 C----- initialize BL by marching with Ue (fudge at separation)
 C       WRITE(*,*)
 C       WRITE(*,*) 'Initializing BL ...'
-c         write(*,*)'VS2 before calling MRCHUE',VS2
        CALL MRCHUE
        LBLINI = .TRUE.
       ENDIF
-C
-c      WRITE(*,*) 'XSI after mrchue',xsi
 C
 C---- march BL with current Ue and Ds to establish transition
       CALL MRCHDU
@@ -175,7 +170,6 @@ C
 C
 C**** Sweep downstream setting up BL equation linearizations
       DO 1000 IBL=2, NBL(IS)
-c      write(*,*) 'Xsi at start of 1000 loop',XSI
       IV  = ISYS(IBL,IS)
 C
       SIMI = IBL.ceq.2
@@ -186,11 +180,7 @@ C
       I = IPAN(IBL,IS)
 C
 C---- set primary variables for current station
-c      write(*,*) 'Xsi at start of 1000 loop',XSI
-c      write(*,*) 'IBL',IBL
       XSI = XSSI(IBL,IS)
-c      write(*,*) 'XSSI:',XSSI
-c      stop
 
       IF(IBL.LT.ITRAN(IS)) AMI = CTAU(IBL,IS)
       IF(IBL.GE.ITRAN(IS)) CTI = CTAU(IBL,IS)
@@ -227,17 +217,11 @@ C
 C---- "forced" changes due to mismatch between UEDG and USAV=UINV+dij*MASS
       DUE2 = UEDG(IBL,IS) - USAV(IBL,IS)
       DDS2 = D2_U2*DUE2
-c      write(*,*) 'X2 before BLPRV',X2
-c      write(*,*) 'Xsi before BLPRV',XSI
       CALL BLPRV(XSI,AMI,CTI,THI,DSI,DSWAKI,UEI)
-c      write(*,*) 'X2 after BLPRV',X2
       CALL BLKIN
-c      write(*,*) 'Xsi after BLKIN',XSI
-
 
 C---- check for transition and set TRAN, XT, etc. if found
       IF(TRAN) THEN
-c	WRITE(*,*) 'Calling TRCHECK 1...'
         CALL TRCHEK
 
 c	IF(EXITFLAG.EQ.0) THEN
@@ -249,7 +233,6 @@ c	ENDIF
 C       WRITE(*,*) 'SETBL: Xtr???  n1 n2: ', AMPL1, AMPL2
       ENDIF
 
-c      write(*,*) 'Xsi after tran check',XSI
 
 C---- assemble 10x4 linearized system for dCtau, dTh, dDs, dUe, dXi
 C     at the previous "1" station and the current "2" station
@@ -290,9 +273,7 @@ C----- "forced" changes from  UEDG --- USAV=UINV+dij*MASS  mismatch
        DDS1 = DTE_UTE1*(UEDG(IBLTE(1),1) - USAV(IBLTE(1),1))
      &      + DTE_UTE2*(UEDG(IBLTE(2),2) - USAV(IBLTE(2),2))
 C
-c      write(*,*) 'Xsi after if stuff',XSI
       ELSE
-c      write(*,*) 'Xsi bfore calling blsys again',XSI
        CALL BLSYS
 C
       ENDIF
@@ -515,7 +496,6 @@ C---- set BL variables for next station
   190 CONTINUE
 C
 C---- next streamwise station
-c      write(*,*) 'Xsi after main 1000 loop',XSI
  1000 CONTINUE
 
 
@@ -642,9 +622,7 @@ C
 C-------- check for transition and set appropriate flags and things
           IF((.NOT.SIMI) .AND. (.NOT.TURB)) THEN
 c	   WRITE(*,*) 'Calling TRCHECK 2...'
-c             write(*,*) 'X2 before TRCHEK',X2
            CALL TRCHEK
-c             write(*,*) 'X2 after TRCHEK',X2
 
 c	   IF(EXITFLAG.EQ.0) THEN
 c		RETURN
@@ -673,12 +651,7 @@ C
      &           + CTAU(IBLTE(2),2)*THET(IBLTE(2),2) ) / TTE
            CALL TESYS(CTE,TTE,DTE)
           ELSE
-c             write(*,*) 'ITBL:',ITBL
-c           write(*,*) 'VS2 before BLSYS',VS2
-c           write(*,*) 'VS1 before BLSYS',VS1
            CALL BLSYS
-c           write(*,*) 'VS1 after BLSYS',VS1
-c           write(*,*) 'VS2 after BLSYS',VS2
           ENDIF
 C
           IF(DIRECT) THEN
@@ -770,7 +743,6 @@ C-------- inverse mode (force Hk to prescribed value HTARG)
            VS2(4,3) = HK2_D2
            VS2(4,4) = HK2_U2
            VSREZ(4) = HTARG - HK2
-c           write(*,*) 'VS2 before Guass',VS2
            CALL GAUSS(4,4,VS2,VSREZ,1)
 C
            DMAX = MAX( ABS(VSREZ(2)/THI),
@@ -929,7 +901,7 @@ C----------------------------------------------------
       complex SENNEW
 ccc   REAL MDI
 C
-      DATA DEPS / 1.0E-10 /
+      DATA DEPS / 5.0E-12 /
 C
 C---- constant controlling how far Hk is allowed to deviate
 C-    from the specified value.

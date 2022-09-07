@@ -35,54 +35,27 @@ C     *                                                     *
 C     *                              Mark Drela  1984       *
 C     *******************************************************
 C
-	use complexify 
-	implicit complex(a-h, o-z) 
+      use complexify 
+      implicit complex(a-h, o-z) 
       DIMENSION Z(NSIZ,NSIZ), R(NSIZ,NRHS)
 C     
       DO 1 NP=1, NN-1
          NP1 = NP+1
 C
-C---------------Original Code-----------
-c this utilized the following fortran command
-
-C IF (numerical_expression) snr1, snr2, snr3
-
-c where snr1 is executed if expression is -ve
-c       snr2 is executed if expression is zero
-c       snr3 is executed if expression is +ve
-
-c This will have to be rewritten explictity since 
-c the complex numbers is giving problems
-
 C------ find max pivot index NX
-c        NX = NP
-c        DO 11 N=NP1, NN
-c     IF(ABS(Z(N,NP)) -ABS(Z(NX,NP))) 11,11,111        
-c    111      NX = N
-c   11   CONTINUE
-C
-
         NX = NP
         DO 11 N=NP1, NN
-           ARG = ABS(Z(N,NP)) - ABS(Z(NX,NP))
-c           WRITE(*,*) 'Z(N,NP)',Z(N,NP)
-c           WRITE(*,*) 'Z(NX,NP)',Z(NX,NP)
-
-c           WRITE(*,*) 'arg:',ARG
-           IF (ARG .LT. 0) then
-              GOTO 11
-           ENDIF
-           IF (ARG .CEQ.0) THEN
-              GOTO 11
-           ENDIF
-           if (ARG .GT. 0) THEN
-              GOTO 111
-           ENDIF
-
- 111       NX = N
- 11        CONTINUE
-           
-
+          ARG = ABS(Z(N,NP))-ABS(Z(NX,NP))
+          IF (ARG.LT.0) then
+            GOTO 11
+          ELSE IF (ARG.CEQ.0) THEN
+            GOTO 11
+          ELSE
+            GOTO 111
+          ENDIF
+ 111      NX = N
+ 11     CONTINUE
+C        
         PIVOT = 1.0/Z(NX,NP)
 C
 C------ switch pivots
