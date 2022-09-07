@@ -254,7 +254,7 @@ C
 C----------------------------------------------------------------
       INCLUDE 'XFOIL.INC'
       INCLUDE 'XBL.INC'
-      DATA DAEPS / 1.0E-10 /
+      DATA DAEPS / 1.0E-9 /
 CCC   DATA DAEPS / 1.0D-12 /
 C
 C---- save variables and sensitivities at IBL ("2") for future restoration

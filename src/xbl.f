@@ -775,7 +775,7 @@ C
           CALL DSLIM(DSW,THI,UEI,MSQ,HKLIM)
           DSI = DSW + DSWAKI
 C
-          IF(DMAX.LE.1.0E-10) GO TO 110
+          IF(DMAX.LE.1.0E-9) GO TO 110
 C
   100   CONTINUE
 C        WRITE(*,1350) IBL, IS, DMAX 
@@ -896,7 +896,7 @@ C----------------------------------------------------
       REAL SENNEW
 ccc   REAL MDI
 C
-      DATA DEPS / 1.0E-10 /
+      DATA DEPS / 1.0E-9 /
 C
 C---- constant controlling how far Hk is allowed to deviate
 C-    from the specified value.
