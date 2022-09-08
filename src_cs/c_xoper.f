@@ -487,36 +487,6 @@ C
 C----- set  BL position -> system line  pointers
        CALL IBLSYS
 C
-      ELSE
-C
-C----- zero out complex portion of stagnation point arc length position
-       SST = REAL(SST)
-C
-       SST_GO = REAL(SST_GO)
-       SST_GP = REAL(SST_GP)
-C
-C----- zero out complex portion of arc length array for current stagnation point location
-       IS = 1
-C
-       DO IBL=1, IBLTE(IS)
-         XSSI(IBL,IS) = REAL(XSSI(IBL,IS))
-       ENDDO
-C
-       IS = 2
-C
-       DO IBL=1, IBLTE(IS)
-         XSSI(IBL,IS) = REAL(XSSI(IBL,IS))
-       ENDDO
-C
-       DO IBL=IBLTE(IS) + 1, NBL(IS)
-         XSSI(IBL,IS) = REAL(XSSI(IBL,IS))
-       ENDDO
-C
-C----- zero out complex portion of wake gap array
-       DO IW=1, NW
-         WGAP(IW) = REAL(WGAP(IW))
-       ENDDO
-C
       ENDIF
 C
 C---- set inviscid BL edge velocity UINV from QINV
@@ -531,17 +501,6 @@ C----- set initial Ue from inviscid Ue
 C
        DO IBL=1, NBL(2)
          UEDG(IBL,2) = UINV(IBL,2)
-       ENDDO
-C
-      ELSE
-C
-C----- zero out complex portion of initial Ue
-       DO IBL=1, NBL(1)
-         UEDG(IBL,1) = REAL(UEDG(IBL,1))
-       ENDDO
-C
-       DO IBL=1, NBL(2)
-         UEDG(IBL,2) = REAL(UEDG(IBL,2))
        ENDDO
 C
       ENDIF
