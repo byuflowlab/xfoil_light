@@ -513,7 +513,7 @@ C
        ENDDO
 C
 C----- zero out complex portion of wake gap array
-       DO 35 IW=1, NW
+       DO IW=1, NW
          WGAP(IW) = REAL(WGAP(IW))
        ENDDO
 C
