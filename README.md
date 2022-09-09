@@ -12,7 +12,7 @@ We recommend using the [Xfoil.jl](https://github.com/byuflowlab/Xfoil.jl) Julia 
 
 ### Python
 
-Since at this point in time the code in this package is essentially the same as that found in the [CMPLXFOIL](https://github.com/mdolab/CMPLXFOIL) project we recommend using the [pyXLIGHT](https://github.com/mdolab/CMPLXFOIL) project instead.
+Since at this point in time the code in this package is essentially the same as that found in the [CMPLXFOIL](https://github.com/mdolab/CMPLXFOIL) project we recommend using the [CMPLXFOIL](https://github.com/mdolab/CMPLXFOIL) project instead.
 
 ### Other Languages
 
