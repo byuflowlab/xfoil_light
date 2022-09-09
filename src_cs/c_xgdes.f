@@ -93,29 +93,29 @@ C
 	implicit complex(a-h, o-z)
       DIMENSION X(N),XP(N),Y(N),YP(N),S(N)
 C
-      IF(XF .ceq. -999.0)
-     &  CALL ASKR('Enter flap hinge x location^',XF)
+C      IF(XF .ceq. -999.0)
+C     &  CALL ASKR('Enter flap hinge x location^',XF)
 C
 C---- find top and bottom y at hinge x location
-      TOPS = S(1) + (X(1) - XF)
-      BOTS = S(N) - (X(N) - XF)
-      CALL SINVRT(TOPS,XF,X,XP,S,N)
-      CALL SINVRT(BOTS,XF,X,XP,S,N)
-      TOPY = SEVAL(TOPS,Y,YP,S,N)
-      BOTY = SEVAL(BOTS,Y,YP,S,N)
+C      TOPS = S(1) + (X(1) - XF)
+C      BOTS = S(N) - (X(N) - XF)
+C      CALL SINVRT(TOPS,XF,X,XP,S,N)
+C      CALL SINVRT(BOTS,XF,X,XP,S,N)
+C      TOPY = SEVAL(TOPS,Y,YP,S,N)
+C      BOTY = SEVAL(BOTS,Y,YP,S,N)
 C
-      WRITE(*,1000) TOPY, BOTY
- 1000 FORMAT(/'  Top    surface:  y =', F8.4,'     y/t = 1.0'
-     &       /'  Bottom surface:  y =', F8.4,'     y/t = 0.0')
+C      WRITE(*,1000) TOPY, BOTY
+C 1000 FORMAT(/'  Top    surface:  y =', F8.4,'     y/t = 1.0'
+C     &       /'  Bottom surface:  y =', F8.4,'     y/t = 0.0')
 C
-      IF(YF .ceq. -999.0)
-     & CALL ASKR(
-     &  'Enter flap hinge y location (or 999 to specify y/t)^',YF)
+C      IF(YF .ceq. -999.0)
+C     & CALL ASKR(
+C     &  'Enter flap hinge y location (or 999 to specify y/t)^',YF)
 C
-      IF(YF .ceq. 999.0) THEN
-        CALL ASKR('Enter flap hinge relative y/t location^',YREL)
-	YF = TOPY*YREL + BOTY*(1.0-YREL)
-      ENDIF
+C      IF(YF .ceq. 999.0) THEN
+C        CALL ASKR('Enter flap hinge relative y/t location^',YREL)
+C	YF = TOPY*YREL + BOTY*(1.0-YREL)
+C      ENDIF
 C
       RETURN
       END ! GETXYF
