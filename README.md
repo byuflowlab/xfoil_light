@@ -12,7 +12,7 @@ We recommend using the [Xfoil.jl](https://github.com/byuflowlab/Xfoil.jl) Julia 
 
 ### Python
 
-Since at this point in time the code in this package is essentially the same as that found in th [pyXLIGHT](https://github.com/mdolab/pyXLIGHT) project we recommend using the [pyXLIGHT](https://github.com/mdolab/pyXLIGHT) project instead.
+Since at this point in time the code in this package is essentially the same as that found in the [CMPLXFOIL](https://github.com/mdolab/CMPLXFOIL) project we recommend using the [pyXLIGHT](https://github.com/mdolab/CMPLXFOIL) project instead.
 
 ### Other Languages
 
@@ -29,7 +29,7 @@ make install
 
 By default these commands will build and install the libraries `xfoil_light` and `xfoil_light_cs` to `/usr/local/lib`  Note that root privileges (`sudo`) may be necessary for the installation command.
 
-For examples of how to access these shared libraries see the [Xfoil.jl](https://github.com/byuflowlab/Xfoil.jl) and [pyXLIGHT](https://github.com/mdolab/pyXLIGHT) packages.
+For examples of how to access these shared libraries see the [Xfoil.jl](https://github.com/byuflowlab/Xfoil.jl) and [CMPLXFOIL](https://github.com/mdolab/CMPLXFOIL) packages.
 
 ## Alternatives
 
